@@ -16,32 +16,35 @@ GO
 /*Creating table*/
 raiserror('Creating Table Product....',0,1)
 create table Product
+
 (
-	ProId char primary key not null,
-	ProBrand varchar not null,
-	ProType varchar not null,
-	Sale money not null,
-	Stock int,
-	AgeGroup varchar,
-	Size varchar(1),
-	Color varchar,
-	Picture image,
+	ProId nvarchar(4) primary key not null,
+	ProBrand nvarchar(10) not null,
+	ProType nvarchar(20) not null,
+	Price float not null,
+	Sale float,
+	Stock float,
+	AgeGroup nvarchar(10),
+	Size nvarchar(10),
+	Color nvarchar(10),
 )
 go
 
 raiserror('Creating Table Cart....',0,1)
 create table Cart
+
 (
 	CartId char primary key not null,
 	Account varchar not null,
-	ProId char,
-	Amount int not null,
+	ProId varchar(4),
+	Amount int,
 	foreign key(ProId) references Product(ProId),
 )
 go
 
 raiserror('Creating Table Order....',0,1)
 create table ProOrder
+
 (
 	CartId char,
 	OrderDate date,
@@ -52,6 +55,7 @@ go
 
 raiserror('Creating Table User....',0,1)
 create table ProUser
+
 (
 	UserId char primary key,
 	Username varchar not null,
@@ -60,6 +64,10 @@ create table ProUser
 )
 go
 
+drop table Product
+drop table Cart
+drop table ProUser
+drop table ProOrder
 /*****************************************************/
 -- Populating data into the tables
 /********************/
