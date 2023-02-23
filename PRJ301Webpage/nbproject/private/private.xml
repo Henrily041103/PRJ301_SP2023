@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/hotha/Downloads/AssignmentPRJ301/src/java/sample/user/UserError.java</file>
+            <file>file:/C:/Users/hotha/Downloads/AssignmentPRJ301/src/java/sample/controller/LogoutController.java</file>
+            <file>file:/C:/Users/hotha/Downloads/AssignmentPRJ301/src/java/sample/controller/LoginController.java</file>
+            <file>file:/C:/Users/hotha/Downloads/AssignmentPRJ301/web/user.jsp</file>
+            <file>file:/C:/Users/hotha/Downloads/AssignmentPRJ301/web/shopping.jsp</file>
+            <file>file:/C:/Users/hotha/Downloads/AssignmentPRJ301/src/java/sample/controller/MainController.java</file>
+            <file>file:/C:/Users/hotha/Downloads/AssignmentPRJ301/src/java/sample/createcontroller/CreateProController.java</file>
+            <file>file:/C:/Users/hotha/Downloads/AssignmentPRJ301/web/create.jsp</file>
+            <file>file:/C:/Users/hotha/Downloads/AssignmentPRJ301/src/java/sample/user/UserDAO.java</file>
+            <file>file:/C:/Users/hotha/Downloads/AssignmentPRJ301/src/java/sample/product/ProductDAO.java</file>
+            <file>file:/C:/Users/hotha/Downloads/AssignmentPRJ301/src/java/sample/searchcontroller/SearchProController.java</file>
+            <file>file:/C:/Users/hotha/Downloads/AssignmentPRJ301/src/java/sample/user/UserDTO.java</file>
+            <file>file:/C:/Users/hotha/Downloads/AssignmentPRJ301/src/java/sample/product/CartDTO.java</file>
+            <file>file:/C:/Users/hotha/Downloads/AssignmentPRJ301/web/viewCart.jsp</file>
+            <file>file:/C:/Users/hotha/Downloads/AssignmentPRJ301/src/java/sample/deletecontroller/DeleteController.java</file>
+            <file>file:/C:/Users/hotha/Downloads/AssignmentPRJ301/src/java/sample/filters/AuthenFilter.java</file>
+            <file>file:/C:/Users/hotha/Downloads/AssignmentPRJ301/src/java/sample/cartcontroller/ChangeController.java</file>
+            <file>file:/C:/Users/hotha/Downloads/AssignmentPRJ301/web/createpro.jsp</file>
+            <file>file:/C:/Users/hotha/Downloads/AssignmentPRJ301/src/java/sample/updatecontroller/UpdateProController.java</file>
+            <file>file:/C:/Users/hotha/Downloads/AssignmentPRJ301/web/admin.jsp</file>
+            <file>file:/C:/Users/hotha/Downloads/AssignmentPRJ301/web/login.jsp</file>
+            <file>file:/C:/Users/hotha/Downloads/AssignmentPRJ301/src/java/sample/searchcontroller/SearchController.java</file>
+            <file>file:/C:/Users/hotha/Downloads/AssignmentPRJ301/src/java/sample/createcontroller/CreateController.java</file>
+            <file>file:/C:/Users/hotha/Downloads/AssignmentPRJ301/src/java/sample/controller/AddController.java</file>
+            <file>file:/C:/Users/hotha/Downloads/AssignmentPRJ301/src/java/sample/cartcontroller/RemoveController.java</file>
+            <file>file:/C:/Users/hotha/Downloads/AssignmentPRJ301/web/error.jsp</file>
+        </group>
+    </open-files>
+</project-private>
