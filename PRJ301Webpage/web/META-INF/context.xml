@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/AssignmentPRJ301_SE162134_Ho Tan Thanh">
+<Context path="/AssignmentPRJ301_SE162134_Ho_Tan_Thanh">
   <Resource auth="Container" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" name="DBCon" password="12345" type="javax.sql.DataSource" url="jdbc:sqlserver://localhost:1433;databaseName=BabyShopManagement" username="sa">
         
 </Resource>
