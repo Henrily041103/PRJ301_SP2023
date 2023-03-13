@@ -23,10 +23,9 @@
                     <th>No.</th>
                     <th>Images</th>
                     <th>Id</th>
-                    <th>Brand</th>
-                    <th>Type</th>
+                    <th>Name</th>
                     <th>Price</th>
-                    <th></th>
+                    <th>Amount</th>
                 </tr>
                 <c:forEach var="entry" items="${requestScope.cartDis}" varStatus="loop">
                     <tr>
@@ -35,11 +34,10 @@
                             <img src="<c:url value="/WEB-INF/productPics/${image}"/>" alt=""/>
                         </td>
                         <td>${entry.key.id}</td>
-                        <td>${entry.key.brandId}</td>
-                        <td>${entry.key.type}</td>
+                        <td>${entry.key.brandId} - ${entry.key.type}</td>
                         <td>${entry.key.price}</td>
-                        <td>                            
-                            Amount<input type="number" step="1" name="amount" value="1" max="${entry.value}" min="1"></input>
+                        <td>
+                            ${entry.value}                        
                             <button type="submit" class="btn btn-warning" name="op" value="remove"><i class="bi bi-x-lg"></i>Remove</button>
                         </td>
                     </tr>
