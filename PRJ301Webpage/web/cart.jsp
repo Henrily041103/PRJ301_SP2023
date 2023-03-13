@@ -39,7 +39,7 @@
                         <td>${entry.key.type}</td>
                         <td>${entry.key.price}</td>
                         <td>                            
-                            Amount<input type="number" step="1" name="amount" value="1" max="${entry.vajlue}" min="1"></input>
+                            Amount<input type="number" step="1" name="amount" value="1" max="${entry.value}" min="1"></input>
                             <button type="submit" class="btn btn-warning" name="op" value="remove"><i class="bi bi-x-lg"></i>Remove</button>
                         </td>
                     </tr>
