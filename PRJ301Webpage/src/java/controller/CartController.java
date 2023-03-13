@@ -79,17 +79,8 @@ public class CartController extends HttpServlet {
                     case "remove":
                         try {
                             String id = request.getParameter("productId");
-                            int amount = Integer.parseInt(request.getParameter("amount"));
-                            if (cart.get(id) > 0) {
-                                //if exist +1 to amount
-                                int newAmount = cart.get(id) - amount;
-                                cart.put(id, newAmount);
-                                session.setAttribute("cart", cart);
-                            } else {
-                                //if not add new product
-                                cart.remove(id);
-                                session.setAttribute("cart", cart);
-                            }
+                            cart.remove(id);
+                            session.setAttribute("cart", cart);
                         } catch (Exception ex) {
                             //Hien trang thong bao loi
                             ex.printStackTrace();//in thong bao loi chi tiet cho developer
