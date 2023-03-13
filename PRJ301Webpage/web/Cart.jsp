@@ -28,7 +28,7 @@
                     <th>Price</th>
                     <th></th>
                 </tr>
-                <c:forEach var="entry" items="${pageScope.cartDis}" varStatus="loop">
+                <c:forEach var="entry" items="${requestScope.cartDis}" varStatus="loop">
                     <tr>
                         <td>${loop.count}</td>
                         <td>
