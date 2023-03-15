@@ -24,6 +24,7 @@ import javax.servlet.http.HttpSession;
 import javax.swing.text.Document;
 import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionBindingListener;
+
 /**
  *
  * @author PHT
@@ -58,64 +59,55 @@ public class CartController extends HttpServlet {
                 break;
 
             case "buy_handler": //Luu thong tin vao db
-                if(session.getAttribute("current-user")!=null){
-                String op = request.getParameter("op");              
-                switch (op) {
-                    case "buy":
-                        try {
-                            HashMap<Product, Integer> cartDisplay = request.getAttribute("cartDis");
-                            pf.lowerStock(cartDisplay); //stock amount - cart amount
-                            session.removeAttribute("cart");
-                            request.getRequestDispatcher("/view/home/Receipt.jsp").forward(request, response);
-                        } catch (Exception ex) {
-                            //Hien trang thong bao loi
-                            ex.printStackTrace();//in thong bao loi chi tiet cho developer
-                            request.setAttribute("message", ex.getMessage());
-                            request.setAttribute("controller", "error");
-                            request.setAttribute("action", "error");
-                            request.getRequestDispatcher("/view/home/error.jsp").forward(request, response);
-                        }
-                        break;
-                    case "remove":
-                        try {
-                            String id = request.getParameter("productId");
-                            int amount = Integer.parseInt(request.getParameter("amount"));
-                            if (cart.get(id) > 0) {
-                                //if exist +1 to amount
-                                int newAmount = cart.get(id) - amount;
-                                cart.put(id, newAmount);
-                                session.setAttribute("cart", cart);
-                            } else {
-                                //if not add new product
+                if (session.getAttribute("current-user") != null) {
+                    String op = request.getParameter("op");
+                    switch (op) {
+                        case "buy":
+                            try {
+                                HashMap<Product, Integer> cartDisplay = request.getAttribute("cartDis");
+                                pf.lowerStock(cartDisplay); //stock amount - cart amount
+                                session.removeAttribute("cart");
+                                request.getRequestDispatcher("/view/home/Receipt.jsp").forward(request, response);
+                            } catch (Exception ex) {
+                                //Hien trang thong bao loi
+                                ex.printStackTrace();//in thong bao loi chi tiet cho developer
+                                request.setAttribute("message", ex.getMessage());
+                                request.setAttribute("controller", "error");
+                                request.setAttribute("action", "error");
+                                request.getRequestDispatcher("/view/home/error.jsp").forward(request, response);
+                            }
+                            break;
+                        case "remove":
+                            try {
+                                String id = request.getParameter("productId");
                                 cart.remove(id);
                                 session.setAttribute("cart", cart);
+                            } catch (Exception ex) {
+                                //Hien trang thong bao loi
+                                ex.printStackTrace();//in thong bao loi chi tiet cho developer
+                                request.setAttribute("message", ex.getMessage());
+                                request.setAttribute("controller", "error");
+                                request.setAttribute("action", "error");
+                                request.getRequestDispatcher("/view/home/error.jsp").forward(request, response);
                             }
-                        } catch (Exception ex) {
-                            //Hien trang thong bao loi
-                            ex.printStackTrace();//in thong bao loi chi tiet cho developer
-                            request.setAttribute("message", ex.getMessage());
-                            request.setAttribute("controller", "error");
-                            request.setAttribute("action", "error");
-                            request.getRequestDispatcher("/view/home/error.jsp").forward(request, response);
-                        }
-                    case "empty":
-                        try {
-                            session.removeAttribute("cart");
-                        } catch (Exception ex) {
-                            //Hien trang thong bao loi
-                            ex.printStackTrace();//in thong bao loi chi tiet cho developer
-                            request.setAttribute("message", ex.getMessage());
-                            request.setAttribute("controller", "error");
-                            request.setAttribute("action", "error");
-                            request.getRequestDispatcher("/view/home/error.jsp").forward(request, response);
-                        }
-                        break;
-                    case "back":
-                        //Trở về trang chính shop
-                        response.sendRedirect(request.getContextPath() + "/index.do");
-                        break;
-                }
-                }else{
+                        case "empty":
+                            try {
+                                session.removeAttribute("cart");
+                            } catch (Exception ex) {
+                                //Hien trang thong bao loi
+                                ex.printStackTrace();//in thong bao loi chi tiet cho developer
+                                request.setAttribute("message", ex.getMessage());
+                                request.setAttribute("controller", "error");
+                                request.setAttribute("action", "error");
+                                request.getRequestDispatcher("/view/home/error.jsp").forward(request, response);
+                            }
+                            break;
+                        case "back":
+                            //Trở về trang chính shop
+                            response.sendRedirect(request.getContextPath() + "/index.do");
+                            break;
+                    }
+                } else {
                     response.sendRedirect(request.getContextPath() + "login.do");
                 }
                 break;
