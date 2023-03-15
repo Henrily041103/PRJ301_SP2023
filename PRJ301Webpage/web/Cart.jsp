@@ -16,7 +16,6 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     </head>
     <body>
-<<<<<<< HEAD
         <jsp:include page="Menu.jsp"></jsp:include>
         <button class="btn btn-primary" name="action" value="back"><i class="bi bi-bag"></i>Home</button>
             <div class="shopping-cart">
@@ -92,43 +91,5 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>
-
 </html>
 </html>
-=======
-        <form action="<c:url value="/controller/buy_handler.do"/>">
-            <button class="btn btn-primary" name="action" value="back"><i class="bi bi-bag"></i>Home</button>
-            <table class="table table-striped">
-                <tr>
-                    <th>No.</th>
-                    <th>Images</th>
-                    <th>Id</th>
-                    <th>Brand</th>
-                    <th>Type</th>
-                    <th>Price</th>
-                    <th></th>
-                </tr>
-                <c:forEach var="entry" items="${pageScope.cartDis}" varStatus="loop">
-                    <tr>
-                        <td>${loop.count}</td>
-                        <td>
-                            <img src="<c:url value="/WEB-INF/productPics/${image}"/>" alt=""/>
-                        </td>
-                        <td>${entry.key.id}</td>
-                        <td>${entry.key.brandId}</td>
-                        <td>${entry.key.type}</td>
-                        <td>${entry.key.price}</td>
-                        <td>                            
-                            Amount<input type="number" step="1" name="amount" value="1" max="${entry.vajlue}" min="1"></input>
-                            <button type="submit" class="btn btn-warning" name="op" value="remove"><i class="bi bi-x-lg"></i>Remove</button>
-                        </td>
-                    </tr>
-                </c:forEach>
-            </table>
-            <p>Total: ${total}</p>
-            <button type="submit" class="btn btn-success" name="op" value="buy"><i class="bi bi-cart-check-fill"></i>Buy</button>
-            <button type="submit" class="btn btn-danger" name="op" value="remove"><i class="bi bi-cart-check-fill"></i>Empty</button>
-        </form>
-    </body>
-</html>
->>>>>>> 159c1aebd28cb2b69a28162607aeb9f05ae0ca6a
