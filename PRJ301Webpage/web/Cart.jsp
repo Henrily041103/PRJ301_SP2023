@@ -22,22 +22,19 @@
                 <tr>
                     <th>No.</th>
                     <th>Images</th>
-                    <th>Id</th>
                     <th>Name</th>
                     <th>Price</th>
                     <th>Amount</th>
                 </tr>
-                <c:forEach var="entry" items="${requestScope.cartDis}" varStatus="loop">
+                <c:forEach var="entry" items="${pageScope.cartDis}" varStatus="loop">
                     <tr>
                         <td>${loop.count}</td>
                         <td>
                             <img src="<c:url value="/WEB-INF/productPics/${image}"/>" alt=""/>
                         </td>
-                        <td>${entry.key.id}</td>
-                        <td>${entry.key.brandId} - ${entry.key.type}</td>
-                        <td>${entry.key.price}</td>
-                        <td>
-                            ${entry.value}                        
+                        <td>${entry.key.id} - ${entry.key.brandId} - ${entry.key.type}</td>
+                        <td>${entry.key.price}</td>    
+                        <td>${entry.key.brandId}</td>
                             <button type="submit" class="btn btn-warning" name="op" value="remove"><i class="bi bi-x-lg"></i>Remove</button>
                         </td>
                     </tr>
