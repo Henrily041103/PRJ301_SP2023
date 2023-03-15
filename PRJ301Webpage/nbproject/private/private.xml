@@ -17,15 +17,11 @@
             <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/web/Cart.jsp</file>
             <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/controller/UnrecognizedActionException.java</file>
             <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/model/account/AccountFactory.java</file>
-            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/web/create.jsp</file>
             <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/model/account/AccountDAO.java</file>
             <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/model/account/AccountNotFoundException.java</file>
-            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/web/error.jsp</file>
             <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/controller/FrontController.java</file>
             <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/controller/AuthenFilter.java</file>
             <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/controller/user/login/LoginController.java</file>
-            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/web/shopping.jsp</file>
-            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/web/admin.jsp</file>
             <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/controller/CartController.java</file>
             <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/model/account/AccountAlreadyExistsException.java</file>
             <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/model/account/AccountEntity.java</file>
