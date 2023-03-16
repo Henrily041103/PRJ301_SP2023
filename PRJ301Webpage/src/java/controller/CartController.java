@@ -47,7 +47,7 @@ public class CartController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String controller = (String) request.getAttribute("controller");
         String action = (String) request.getAttribute("action");
-        ProductFacade pf = new ProductFacade();
+        ProductDAO pf = new ProductDAO();
         //hashmap to store cart
         HttpSession session = request.getSession();
         HashMap<String, Integer> cart = session.getAttribute("cart") == null ? new HashMap() : (HashMap<String, Integer>) session.getAttribute("cart");
@@ -154,7 +154,7 @@ public class CartController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    public void Add(HttpServletRequest request, HttpServletResponse response, HashMap<String, Integer> cart, HttpSession session, ProductFacade pf)
+    public void Add(HttpServletRequest request, HttpServletResponse response, HashMap<String, Integer> cart, HttpSession session, ProductDAO pf)
             throws ServletException, IOException {
         try {
             String id = request.getParameter("ProId");
@@ -184,7 +184,7 @@ public class CartController extends HttpServlet {
         }
     }
 
-    public void Show(HttpServletRequest request, HttpServletResponse response, HashMap<String, Integer> cart, HttpSession session, ProductFacade pf) throws ServletException, IOException {
+    public void Show(HttpServletRequest request, HttpServletResponse response, HashMap<String, Integer> cart, HttpSession session, ProductDAO pf) throws ServletException, IOException {
         try {
             HashMap<ProductDTO, Integer> cartDisplay = new HashMap();
             List<ProductDTO> plist = new ArrayList();
