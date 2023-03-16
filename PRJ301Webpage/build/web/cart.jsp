@@ -4,17 +4,21 @@
     Author     : ASUS
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="model.product.ProductDTO"%>
+<%@page import="java.util.HashMap"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+        <title>Shopping Cart</title>
+        <link href="../../css/site.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     </head>
-
     <body>
         <jsp:include page="Menu.jsp"></jsp:include>
         <button class="btn btn-primary" name="action" value="back"><i class="bi bi-bag"></i>Home</button>
@@ -35,6 +39,9 @@
                                                         <div class="p-2 px-3 text-uppercase">Product</div>
                                                     </th>
                                                     <th scope="col" class="border-0 bg-light">
+                                                        <div class="py-2 text-uppercase">Discount</div>
+                                                    </th>
+                                                    <th scope="col" class="border-0 bg-light">
                                                         <div class="py-2 text-uppercase">Price</div>
                                                     </th>
                                                     <th scope="col" class="border-0 bg-light">
@@ -53,7 +60,13 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td class="align-middle"><strong>${entry.key.price}</strong></td>
+                                                    <td class="align-middle">
+                                                        <h5>${entry.key.sale}</h5>
+                                                        <h6  style = "text-decoration: line-through">${entry.key.amount}</h6>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <strong>${entry.key.amount*((1-entry.key.sale)*0.01)}</strong>
+                                                    </td>
                                                     <td class="align-middle"><a href="#" class="text-dark">    
                                                             <strong>${entry.value}</strong>
                                                             <button type="submit" class="btn btn-warning" name="op" value="remove"><i class="bi bi-x-lg"></i>Remove</button>
@@ -77,7 +90,7 @@
                                             <h5 class="font-weight-bold">${total}</h5>
                                         </li>
                                     </ul>
-                                    <button type="submit" class="btn btn-success" name="op" value="buy">Buy<i class="bi bi-cart-check-fill"></button>                                                                                                                                                                                                                                                        
+                                    <button type="submit" class="btn btn-success" name="op" value="buy"><i class="bi bi-cart-check-fill">Buy</button>                                                                                                                                                                                                                                                        
                                     <button type="submit" class="btn btn-danger" name="op" value="remove"><i class="bi bi-cart-check-fill"></i>Empty</button>
                                 </div>
                             </div>

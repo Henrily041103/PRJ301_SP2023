@@ -24,6 +24,7 @@ import javax.servlet.http.HttpSession;
 import javax.swing.text.Document;
 import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionBindingListener;
+import model.product.ProductDTO;
 
 /**
  *
@@ -64,7 +65,7 @@ public class CartController extends HttpServlet {
                     switch (op) {
                         case "buy":
                             try {
-                                HashMap<Product, Integer> cartDisplay = request.getAttribute("cartDis");
+                                HashMap<ProductDTO, Integer> cartDisplay = (HashMap<ProductDTO, Integer>) request.getAttribute("cartDis");
                                 pf.lowerStock(cartDisplay); //stock amount - cart amount
                                 session.removeAttribute("cart");
                                 request.getRequestDispatcher("/view/home/Receipt.jsp").forward(request, response);
@@ -79,7 +80,7 @@ public class CartController extends HttpServlet {
                             break;
                         case "remove":
                             try {
-                                String id = request.getParameter("productId");
+                                String id = request.getParameter("ProductDTOId");
                                 cart.remove(id);
                                 session.setAttribute("cart", cart);
                             } catch (Exception ex) {
@@ -158,7 +159,7 @@ public class CartController extends HttpServlet {
         try {
             String id = request.getParameter("ProId");
             int amount = Integer.parseInt(request.getParameter("amount"));
-            //check for existing product
+            //check for existing ProductDTO
             if (cart.containsKey(id)) {
                 if (cart.get(id) < pf.read(id).getStock()) {
                     //if exist +1 to amount
@@ -169,7 +170,7 @@ public class CartController extends HttpServlet {
                     request.setAttribute("message", "out of stock");
                 }
             } else {
-                //if not add new product
+                //if not add new ProductDTO
                 cart.put(id, 1);
                 session.setAttribute("cart", cart);
             }
@@ -185,15 +186,15 @@ public class CartController extends HttpServlet {
 
     public void Show(HttpServletRequest request, HttpServletResponse response, HashMap<String, Integer> cart, HttpSession session, ProductFacade pf) throws ServletException, IOException {
         try {
-            HashMap<Product, Integer> cartDisplay = new HashMap();
-            List<Product> plist = new ArrayList();
-            List image = new ArrayList();
+            HashMap<ProductDTO, Integer> cartDisplay = new HashMap();
+            List<ProductDTO> plist = new ArrayList();
+            List<String> image = new ArrayList();
             double total = 0;
             plist = pf.select();
             for (String i : cart.keySet()) {
                 for (int p = 0; p <= plist.size(); p++) {
                     if (plist.get(p).getId().equals(i)) {
-                        //gọi hàm read lấy data product trong hashmap
+                        //gọi hàm read lấy data ProductDTO trong hashmap
                         total = total + (plist.get(p).getPrice() * cart.get(i));
                         cartDisplay.put(plist.get(p), cart.get(i));
                         image.add(pf.getImage(plist.get.(p)));
