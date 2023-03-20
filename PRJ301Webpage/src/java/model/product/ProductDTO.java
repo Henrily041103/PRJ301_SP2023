@@ -12,7 +12,7 @@ import java.io.File;
  * @author PC
  */
 public class ProductDTO {
-    private int id;
+    private String id;
     private String brand;
     private String type;
     private double price;
@@ -25,7 +25,7 @@ public class ProductDTO {
     public ProductDTO() {
     }
 
-    public ProductDTO(int id, String brand, String type, double price, int sale, int stock, String ageGroup, String size, String color) {
+    public ProductDTO(String id, String brand, String type, double price, int sale, int stock, String ageGroup, String size, String color) {
         this.id = id;
         this.brand = brand;
         this.type = type;
@@ -37,7 +37,7 @@ public class ProductDTO {
         this.color = color;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -73,7 +73,7 @@ public class ProductDTO {
         return color;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -108,4 +108,8 @@ public class ProductDTO {
     public void setColor(String color) {
         this.color = color;
     }    
+    
+    public String getName(){
+        return this.type + this.brand + this.color + this.id;
+    }
 }
