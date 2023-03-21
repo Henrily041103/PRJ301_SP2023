@@ -6,19 +6,19 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<h2>Toy Edit</h2>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<h2>Toy Creation</h2>
 <hr/>
 <div class="row">
     <div class="col">
-        <form action="<c:url value="/shop/edit_handler.do" />">
+        <form action="<c:url value="/create_handler.do" />">
             <div class="mb-3 mt-3">
                 <label for="id" class="form-label">Id:</label>
-                <input disabled type="text" class="form-control" id="id" placeholder="${product.id}" value="${product.id}">
-                <input type="hidden" name="id" value="${product.id}" />
+                <input type="text" class="form-control" id="id" placeholder="Product id" name="id" value="${product.id}">
             </div>
             <div class="mb-3">
                 <label for="name" class="form-label">Type</label>
-                <input type="text" class="form-control" id="name" placeholder="Product type" name="type" value="${product.type}">
+                <input type="text" class="form-control" id="name" placeholder="Product type" name="type" value="${product.name}">
             </div>
             <div class="mb-3">
                 <label for="price" class="form-label">Price:</label>
@@ -52,10 +52,10 @@
                     </c:forEach>
                 </select>
             </div>
-
-            <button type="submit" class="btn btn-outline-success" name="op" value="update"><i class="bi bi-check-lg"></i> Update</button>
+            <button type="submit" class="btn btn-outline-success" name="op" value="create"><i class="bi bi-check-lg"></i> Create</button>
             <button type="submit" class="btn btn-outline-danger" name="op" value="cancel"><i class="bi bi-x-lg"></i> Cancel</button>
         </form>
+        <i style="color:red;">${message}</i>
     </div>
     <div class="col">
         <img src="<c:url value="/images/mickey.gif" />" alt=""/>
