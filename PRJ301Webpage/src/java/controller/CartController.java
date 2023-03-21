@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers;
+package controller;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,6 +24,9 @@ import javax.servlet.http.HttpSession;
 import javax.swing.text.Document;
 import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionBindingListener;
+import model.product.ProductDAO;
+import model.product.ProductDTO;
+
 /**
  *
  * @author PHT
@@ -45,77 +48,68 @@ public class CartController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String controller = (String) request.getAttribute("controller");
         String action = (String) request.getAttribute("action");
-        ProductFacade pf = new ProductFacade();
+        ProductDAO pd = new ProductDAO();
         //hashmap to store cart
         HttpSession session = request.getSession();
         HashMap<String, Integer> cart = session.getAttribute("cart") == null ? new HashMap() : (HashMap<String, Integer>) session.getAttribute("cart");
         switch (action) {
             case "add":
-                Add(request, response, cart, session, pf);
+                Add(request, response, cart, session, pd);
                 break;
             case "show":
-                Show(request, response, cart, session, pf);
+                Show(request, response, cart, session, pd);
                 break;
 
             case "buy_handler": //Luu thong tin vao db
-                if(session.getAttribute("current-user")!=null){
-                String op = request.getParameter("op");              
-                switch (op) {
-                    case "buy":
-                        try {
-                            HashMap<Product, Integer> cartDisplay = request.getAttribute("cartDis");
-                            pf.lowerStock(cartDisplay); //stock amount - cart amount
-                            session.removeAttribute("cart");
-                            request.getRequestDispatcher("/view/home/Receipt.jsp").forward(request, response);
-                        } catch (Exception ex) {
-                            //Hien trang thong bao loi
-                            ex.printStackTrace();//in thong bao loi chi tiet cho developer
-                            request.setAttribute("message", ex.getMessage());
-                            request.setAttribute("controller", "error");
-                            request.setAttribute("action", "error");
-                            request.getRequestDispatcher("/view/home/error.jsp").forward(request, response);
-                        }
-                        break;
-                    case "remove":
-                        try {
-                            String id = request.getParameter("productId");
-                            int amount = Integer.parseInt(request.getParameter("amount"));
-                            if (cart.get(id) > 0) {
-                                //if exist +1 to amount
-                                int newAmount = cart.get(id) - amount;
-                                cart.put(id, newAmount);
-                                session.setAttribute("cart", cart);
-                            } else {
-                                //if not add new product
+                if (session.getAttribute("current-user") != null) {
+                    String op = request.getParameter("op");
+                    switch (op) {
+                        case "buy":
+                            try {
+                                HashMap<ProductDTO, Integer> cartDisplay = (HashMap<ProductDTO, Integer>) request.getAttribute("cartDis");
+                                pd.lowerStock(cartDisplay); //stock amount - cart amount
+                                session.removeAttribute("cart");
+                                request.getRequestDispatcher("/view/home/Receipt.jsp").forward(request, response);
+                            } catch (Exception ex) {
+                                //Hien trang thong bao loi
+                                ex.printStackTrace();//in thong bao loi chi tiet cho developer
+                                request.setAttribute("message", ex.getMessage());
+                                request.setAttribute("controller", "error");
+                                request.setAttribute("action", "error");
+                                request.getRequestDispatcher("/view/home/error.jsp").forward(request, response);
+                            }
+                            break;
+                        case "remove":
+                            try {
+                                String id = request.getParameter("ProductDTOId");
                                 cart.remove(id);
                                 session.setAttribute("cart", cart);
+                            } catch (Exception ex) {
+                                //Hien trang thong bao loi
+                                ex.printStackTrace();//in thong bao loi chi tiet cho developer
+                                request.setAttribute("message", ex.getMessage());
+                                request.setAttribute("controller", "error");
+                                request.setAttribute("action", "error");
+                                request.getRequestDispatcher("/view/home/error.jsp").forward(request, response);
                             }
-                        } catch (Exception ex) {
-                            //Hien trang thong bao loi
-                            ex.printStackTrace();//in thong bao loi chi tiet cho developer
-                            request.setAttribute("message", ex.getMessage());
-                            request.setAttribute("controller", "error");
-                            request.setAttribute("action", "error");
-                            request.getRequestDispatcher("/view/home/error.jsp").forward(request, response);
-                        }
-                    case "empty":
-                        try {
-                            session.removeAttribute("cart");
-                        } catch (Exception ex) {
-                            //Hien trang thong bao loi
-                            ex.printStackTrace();//in thong bao loi chi tiet cho developer
-                            request.setAttribute("message", ex.getMessage());
-                            request.setAttribute("controller", "error");
-                            request.setAttribute("action", "error");
-                            request.getRequestDispatcher("/view/home/error.jsp").forward(request, response);
-                        }
-                        break;
-                    case "back":
-                        //Trở về trang chính shop
-                        response.sendRedirect(request.getContextPath() + "/index.do");
-                        break;
-                }
-                }else{
+                        case "empty":
+                            try {
+                                session.removeAttribute("cart");
+                            } catch (Exception ex) {
+                                //Hien trang thong bao loi
+                                ex.printStackTrace();//in thong bao loi chi tiet cho developer
+                                request.setAttribute("message", ex.getMessage());
+                                request.setAttribute("controller", "error");
+                                request.setAttribute("action", "error");
+                                request.getRequestDispatcher("/view/home/error.jsp").forward(request, response);
+                            }
+                            break;
+                        case "back":
+                            //Trở về trang chính shop
+                            response.sendRedirect(request.getContextPath() + "/index.do");
+                            break;
+                    }
+                } else {
                     response.sendRedirect(request.getContextPath() + "login.do");
                 }
                 break;
@@ -161,14 +155,14 @@ public class CartController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    public void Add(HttpServletRequest request, HttpServletResponse response, HashMap<String, Integer> cart, HttpSession session, ProductFacade pf)
+    public void Add(HttpServletRequest request, HttpServletResponse response, HashMap<String, Integer> cart, HttpSession session, ProductDAO pd)
             throws ServletException, IOException {
         try {
             String id = request.getParameter("ProId");
             int amount = Integer.parseInt(request.getParameter("amount"));
-            //check for existing product
+            //check for existing ProductDTO
             if (cart.containsKey(id)) {
-                if (cart.get(id) < pf.read(id).getStock()) {
+                if (cart.get(id) < pd.read(id).getStock()) {
                     //if exist +1 to amount
                     int newAmount = cart.get(id) + amount;
                     cart.put(id, newAmount);
@@ -177,7 +171,7 @@ public class CartController extends HttpServlet {
                     request.setAttribute("message", "out of stock");
                 }
             } else {
-                //if not add new product
+                //if not add new ProductDTO
                 cart.put(id, 1);
                 session.setAttribute("cart", cart);
             }
@@ -191,20 +185,20 @@ public class CartController extends HttpServlet {
         }
     }
 
-    public void Show(HttpServletRequest request, HttpServletResponse response, HashMap<String, Integer> cart, HttpSession session, ProductFacade pf) throws ServletException, IOException {
+    public void Show(HttpServletRequest request, HttpServletResponse response, HashMap<String, Integer> cart, HttpSession session, ProductDAO pd) throws ServletException, IOException {
         try {
-            HashMap<Product, Integer> cartDisplay = new HashMap();
-            List<Product> plist = new ArrayList();
-            List image = new ArrayList();
+            HashMap<ProductDTO, Integer> cartDisplay = new HashMap();
+            List<ProductDTO> plist = new ArrayList();
+            List<String> image = new ArrayList();
             double total = 0;
-            plist = pf.select();
+            plist = pd.select();
             for (String i : cart.keySet()) {
                 for (int p = 0; p <= plist.size(); p++) {
                     if (plist.get(p).getId().equals(i)) {
-                        //gọi hàm read lấy data product trong hashmap
+                        //gọi hàm read lấy data ProductDTO trong hashmap
                         total = total + (plist.get(p).getPrice() * cart.get(i));
                         cartDisplay.put(plist.get(p), cart.get(i));
-                        image.add(pf.getImage(plist.get.(p)));
+//                        image.add(plist.get(p).getImage(plist.get(p).getId()));
                     }
                 }
             }

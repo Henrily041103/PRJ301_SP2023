@@ -31,7 +31,7 @@
                         <td>${loop.count}</td>
                         <td>${entry.key.brandId}, ${entry.key.type}</td>
                         <td>${entry.value}</td>
-                        <td>${entry.key.price}</td>
+                        <td>${entry.key.amount*((1-entry.key.sale)*0.01)}</td>
                     </tr>
                 </c:forEach>
             </table>

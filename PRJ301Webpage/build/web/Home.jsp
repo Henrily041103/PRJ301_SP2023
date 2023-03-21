@@ -16,7 +16,7 @@
         <!--begin of menu-->
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
             <div class="container">
-                <a class="navbar-brand" href="home">Shoes</a>
+                <a class="navbar-brand" href="home">Our Products</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -27,7 +27,7 @@
                             <a class="nav-link" href="#">Manager Account</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Hello Alias</a>
+                            <a class="nav-link" href="#">Hello</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Logout</a>
@@ -56,8 +56,8 @@
         </nav>
         <section class="jumbotron text-center">
             <div class="container">
-                <h1 class="jumbotron-heading">Siêu thị giày chất lượng cao</h1>
-                <p class="lead text-muted mb-0">Uy tín tạo nên thương hiệu với hơn 10 năm cung cấp các sản phầm giày nhập từ Trung Quốc</p>
+                <h1 class="jumbotron-heading">Siêu thị chất lượng cao</h1>
+                <p class="lead text-muted mb-0">Uy tín tạo nên thương hiệu </p>
             </div>
         </section>
         <!--end of menu-->
@@ -131,8 +131,7 @@
                     <div class="col-md-3 col-lg-4 col-xl-3">
                         <h5>About</h5>
                         <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
-                        <p class="mb-0">
-                            Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression.
+                        <p class="mb-0">                            
                         </p>
                     </div>
 

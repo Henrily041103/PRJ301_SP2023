@@ -12,23 +12,21 @@
 
 <h2>Toy CRUD</h2>
 <hr/>
-<a href="<c:url value="/toy/create.do" />"><i class="bi bi-pencil-square"></i> Create</a>
-<a href="<c:url value="/toy/cart.do" />">Cart</a>
-<a href="<c:url value="/toy/receipt.do" />">Receipt</a>
+<a href="<c:url value="/create.do" />"><i class="bi bi-pencil-square"></i> Create</a>
+<a href="<c:url value="/receipt.do" />">Receipt</a>
 
 <div class="container">
     <div class="row">
-        <c:forEach var="toy" items="${list}" varStatus="loop">
+        <c:forEach var="product" items="${list}" varStatus="loop">
             <div class="col-md-3 my-3">
                 <div class="container w-100" style="width: 50rem;">  
-                    <img class="card-img-top" src="<c:url value="/images/saul.gif" />" alt=""/>
+                    <img class="card-img-top" src="<c:url value="${toy.image}" />" alt=""/>
                     <div class="card-body">
-                        <h5 class="card-title">Name: ${toy.name}</h5>
-                        <h6 style="margin-top:5px" class="id">Id: ${toy.id}</h6>
-                        <h6 style="margin-top:5px" class="price">Price: ${toy.price}</h6>
+                        <h5 class="card-title">Name: ${product.name}</h5>
+                        <h6 style="margin-top:5px" class="id">Id: ${product.stock}</h6>
+                        <h6 style="margin-top:5px" class="price">Price: ${product.price}</h6>
                         <div class="mt-3 d-flex justify-content-between">
                             <a href="<c:url value="#" />" class="btn btn-outline-dark"> Add to cart</a> 
-                            <a href="<c:url value="#" />" class="btn btn-outline-primary"> Buy now</a>
                         </div>
                     </div>
                 </div>
@@ -63,15 +61,5 @@ The when condition does not display a link for the current page--%>
 <c:if test="${currentPage lt noOfPages}">
     <td><a href="index.do?page=${currentPage + 1}">Next</a></td>
 </c:if>
-
-<!--<div class="text-xs-center">
-    <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-    </ul>
-</div>-->
 
 
