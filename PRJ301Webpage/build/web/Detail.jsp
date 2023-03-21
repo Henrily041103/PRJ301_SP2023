@@ -151,10 +151,7 @@
                 <div class="row">
                     <div class="col-md-3 col-lg-4 col-xl-3">
                         <h5>About</h5>
-                        <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
-                        <p class="mb-0">
-                            Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression.
-                        </p>
+                        <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">                       
                     </div>
 
                     <div class="col-md-2 col-lg-2 col-xl-2 mx-auto">
