@@ -27,7 +27,7 @@ import model.account.AccountNotFoundException;
 public class LoginController extends HttpServlet {
 
     private static final String ERROR = "login.jsp";
-    private static final String SHOP = "shop.jsp";
+    private static final String SHOP = "index.jsp";
     private static final String REGISTER = "register.jsp";
     private static final String LOGIN = "login.jsp";
 

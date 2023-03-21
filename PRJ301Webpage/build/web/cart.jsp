@@ -1,22 +1,23 @@
 <%-- 
-    Document   : Cart
-    Created on : Oct 31, 2020, 9:42:21 PM
-    Author     : trinh
+    Document   : cart
+    Created on : Feb 22, 2023, 12:39:40 PM
+    Author     : ASUS
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+        <title>Shopping Cart</title>
+        <link href="../../css/site.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     </head>
-
     <body>
         <jsp:include page="Menu.jsp"></jsp:include>
+        <button class="btn btn-primary" name="action" value="back"><i class="bi bi-bag"></i>Home</button>
             <div class="shopping-cart">
                 <div class="px-4 px-lg-0">
 
@@ -31,38 +32,31 @@
                                             <thead>
                                                 <tr>
                                                     <th scope="col" class="border-0 bg-light">
-                                                        <div class="p-2 px-3 text-uppercase">Sản Phẩm</div>
+                                                        <div class="p-2 px-3 text-uppercase">Product</div>
                                                     </th>
                                                     <th scope="col" class="border-0 bg-light">
-                                                        <div class="py-2 text-uppercase">Đơn Giá</div>
+                                                        <div class="py-2 text-uppercase">Price</div>
                                                     </th>
                                                     <th scope="col" class="border-0 bg-light">
-                                                        <div class="py-2 text-uppercase">Số Lượng</div>
-                                                    </th>
-                                                    <th scope="col" class="border-0 bg-light">
-                                                        <div class="py-2 text-uppercase">Xóa</div>
+                                                        <div class="py-2 text-uppercase">Amount</div>
                                                     </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            <c:forEach items="${list}" var="o">
+                                            <c:forEach var="entry" items="${pageScope.cartDis}">
                                                 <tr>
-                                                    <th scope="row">
+                                                    <td scope="row">
                                                         <div class="p-2">
-                                                            <img src="${o.image}" alt="" width="70" class="img-fluid rounded shadow-sm">
+                                                            <img src="<c:url value="/WEB-INF/productPics/${image}"/>" alt="" width="70" class="img-fluid rounded shadow-sm">
                                                             <div class="ml-3 d-inline-block align-middle">
-                                                                <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block">${o.name}</a></h5><span class="text-muted font-weight-normal font-italic"></span>
+                                                                <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block">${entry.key.brandId} ${entry.key.type}</a></h5><span class="text-muted font-weight-normal font-italic"></span>
                                                             </div>
                                                         </div>
-                                                    </th>
-                                                    <td class="align-middle"><strong>${o.price}</strong></td>
-                                                    <td class="align-middle">
-                                                        <a href="#"><button class="btnSub">-</button></a> 
-                                                        <strong>${o.amount}</strong>
-                                                        <a href="#"><button class="btnAdd">+</button></a>
                                                     </td>
-                                                    <td class="align-middle"><a href="#" class="text-dark">
-                                                            <button type="button" class="btn btn-danger">Delete</button>
+                                                    <td class="align-middle"><strong>${entry.key.price}</strong></td>
+                                                    <td class="align-middle"><a href="#" class="text-dark">    
+                                                            <strong>${entry.value}</strong>
+                                                            <button type="submit" class="btn btn-warning" name="op" value="remove"><i class="bi bi-x-lg"></i>Remove</button>
                                                         </a>
                                                     </td>
                                                 </tr> 
@@ -76,27 +70,15 @@
 
                         <div class="row py-5 p-4 bg-white rounded shadow-sm">
                             <div class="col-lg-6">
-                                <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Voucher</div>
-                                <div class="p-4">
-                                    <div class="input-group mb-4 border rounded-pill p-2">
-                                        <input type="text" placeholder="Nhập Voucher" aria-describedby="button-addon3" class="form-control border-0">
-                                        <div class="input-group-append border-0">
-                                            <button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill"><i class="fa fa-gift mr-2"></i>Sử dụng</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Thành tiền</div>
+                                <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold"></div>
                                 <div class="p-4">
                                     <ul class="list-unstyled mb-4">
-                                        <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tổng tiền hàng</strong><strong>100 $</strong></li>
-                                        <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Phí vận chuyển</strong><strong>Free ship</strong></li>
-                                        <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">VAT</strong><strong>10 $</strong></li>
-                                        <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tổng thanh toán</strong>
-                                            <h5 class="font-weight-bold">110 $</h5>
+                                        <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
+                                            <h5 class="font-weight-bold">${total}</h5>
                                         </li>
-                                    </ul><a href="buy" class="btn btn-dark rounded-pill py-2 btn-block">Mua hàng</a>
+                                    </ul>
+                                    <button type="submit" class="btn btn-success" name="op" value="buy">Buy<i class="bi bi-cart-check-fill"></button>                                                                                                                                                                                                                                                        
+                                    <button type="submit" class="btn btn-danger" name="op" value="remove"><i class="bi bi-cart-check-fill"></i>Empty</button>
                                 </div>
                             </div>
                         </div>
@@ -109,6 +91,5 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>
-
 </html>
 </html>
