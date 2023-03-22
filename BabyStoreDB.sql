@@ -30,43 +30,42 @@ create table Product
 )
 go
 
-raiserror('Creating Table Cart....',0,1)
-create table Cart
+raiserror('Creating Table User....',0,1)
+create table tblUser
 
 (
-	CartId char primary key not null,
-	Account varchar not null,
-	ProId varchar(4),
-	Amount int,
-	foreign key(ProId) references Product(ProId),
+	UserID nvarchar(10) primary key,
+	username nvarchar(20) not null,
+	password char(60) not null,
+	role nvarchar(2) not null,
 )
 go
 
+/*
 raiserror('Creating Table Order....',0,1)
 create table ProOrder
 
 (
-	CartId char,
+	OrderId int primary key,
 	OrderDate date,
-	foreign key(CartId) references Cart(CartId),
-	primary key(CartId),
+	UserId char,
 )
 go
 
-raiserror('Creating Table User....',0,1)
-create table ProUser
+raiserror('Creating Table Detail....',0,1)
+create table OrderDetail
 
 (
-	UserId char primary key,
-	Username varchar not null,
-	UserPassword char(60) not null,
-	ProUser varchar not null,
+	OrderId int,
+	ProductId nvarchar(4) not null,
+	Amount float not null,
+	foreign key(OrderId) references ProOrder(OrderId),
+	primary key(OrderId),
 )
 go
-
+*/
 drop table Product
-drop table Cart
-drop table ProUser
+drop table tblUser
 drop table ProOrder
 /*****************************************************/
 -- Populating data into the tables

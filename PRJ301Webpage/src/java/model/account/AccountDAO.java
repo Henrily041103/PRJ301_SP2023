@@ -20,12 +20,12 @@ import utils.DBUtils;
 public class AccountDAO {
 
     private static final String LOGIN = "SELECT userId, role FROM tblUser WHERE username = ? AND password = ?";
-    private static final String SEARCH = "SELECT userID, username, password, role FROM tblUser WHERE name like ?";
+    private static final String SEARCH = "SELECT userID, username, password, role FROM tblUser WHERE username like ?";
     private static final String DELETE = "DELETE FROM tblUser WHERE userID = ?";
-    private static final String UPDATE = "UPDATE tblUser SET name=?, password=? WHERE userID = ?";
+    private static final String UPDATE = "UPDATE tblUser SET username=?, password=? WHERE userID = ?";
     private static final String CHANGE_ROLE = "UPDATE tblUser SET role=? WHERE userID = ?";
     private static final String CHECK_DUPLICATE = "SELECT userID FROM tblUser WHERE userID = ?";
-    private static final String INSERT = "INSERT INTO tblUser(userID, name, role, password) VALUES (?, ?, ?, ?)";
+    private static final String INSERT = "INSERT INTO tblUser(userID, username, password, role) VALUES (?, ?, ?, ?)";
     private static final String GET_ALL_USERS = "SELECT userID, username, password, role FROM tblUser";
 
     public AccountEntity checkLogin(String username, String password) throws SQLException {
@@ -82,7 +82,7 @@ public class AccountDAO {
                 while (rs.next()) {
                     String userID = rs.getString("userID");
                     String password = rs.getString("password");
-                    String name = rs.getString("name");
+                    String name = rs.getString("username");
                     String roleID = rs.getString("role");
                     list.add(new AccountEntity(userID, name, password, roleID));
                 }
@@ -103,7 +103,7 @@ public class AccountDAO {
                 while (rs.next()) {
                     String userID = rs.getString("userID");
                     String password = rs.getString("password");
-                    String name = rs.getString("name");
+                    String name = rs.getString("username");
                     String roleID = rs.getString("role");
                     list.add(new AccountEntity(userID, name, password, roleID));
                 }
