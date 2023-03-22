@@ -31,6 +31,16 @@
             <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/web/WEB-INF/web.xml</file>
             <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/controller/CartController.java</file>
             <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/model/account/AccountEntity.java</file>
+            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/model/account/AccountDAO.java</file>
+            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/model/account/AccountNotFoundException.java</file>
+            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/web/Home.jsp</file>
+            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/controller/FrontController.java</file>
+            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/controller/AuthenFilter.java</file>
+            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/controller/user/login/LoginController.java</file>
+            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/controller/ShopController.java</file>
+            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/web/WEB-INF/web.xml</file>
+            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/controller/CartController.java</file>
+            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/model/account/AccountEntity.java</file>
             <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/model/account/AccountModel.java</file>
             <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/model/account/AdminModel.java</file>
             <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/web/Cart.jsp</file>
