@@ -12,6 +12,7 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/D:/work/FPT/2023_HK1/PRJ301/BTL/PRJ301Webpage/src/java/model/account/UserModel.java</file>
             <file>file:/D:/work/FPT/2023_HK1/PRJ301/BTL/PRJ301Webpage/web/index.jsp</file>
             <file>file:/D:/work/FPT/2023_HK1/PRJ301/BTL/PRJ301Webpage/src/java/model/account/AccountModel.java</file>
@@ -19,6 +20,33 @@
             <file>file:/D:/work/FPT/2023_HK1/PRJ301/BTL/PRJ301Webpage/src/java/controller/shop/ShopController.java</file>
             <file>file:/D:/work/FPT/2023_HK1/PRJ301/BTL/PRJ301Webpage/src/java/controller/cart/CartController.java</file>
             <file>file:/D:/work/FPT/2023_HK1/PRJ301/BTL/PRJ301Webpage/web/META-INF/context.xml</file>
+=======
+            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/model/account/AccountDAO.java</file>
+            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/model/account/AccountNotFoundException.java</file>
+            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/web/Home.jsp</file>
+            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/controller/FrontController.java</file>
+            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/controller/AuthenFilter.java</file>
+            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/controller/user/login/LoginController.java</file>
+            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/controller/ShopController.java</file>
+            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/web/WEB-INF/web.xml</file>
+            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/controller/CartController.java</file>
+            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/model/account/AccountEntity.java</file>
+            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/model/account/AccountModel.java</file>
+            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/model/account/AdminModel.java</file>
+            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/web/Cart.jsp</file>
+            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/controller/UnrecognizedActionException.java</file>
+            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/model/account/AccountFactory.java</file>
+            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/web/receipt/Receipt.jsp</file>
+            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/model/product/ProductDAO.java</file>
+            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/web/create.jsp</file>
+            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/web/edit.jsp</file>
+            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/web/Detail.jsp</file>
+            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/web/login.jsp</file>
+            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/model/account/UserModel.java</file>
+            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/web/register.jsp</file>
+            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/model/product/ProductDTO.java</file>
+            <file>file:/C:/FPT/PRJ_project/PRJ301Webpage/src/java/model/account/AccountAlreadyExistsException.java</file>
+>>>>>>> 094c5fb6f38594fec6f8a9b658edadfb22a3c290
         </group>
     </open-files>
 </project-private>
