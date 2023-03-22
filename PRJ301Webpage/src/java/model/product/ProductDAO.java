@@ -177,7 +177,7 @@ public class ProductDAO {
         for (ProductDTO i : cart.keySet()) {            
             PreparedStatement stm = con.prepareStatement("update product set stock = ? where ProID = ?");
             stm.setInt(1, (i.getStock() - cart.get(i)));
-            stm.setString(2, i.getId().toString());
+            stm.setString(2, i.getId());
             int count = stm.executeUpdate();
         }
 
