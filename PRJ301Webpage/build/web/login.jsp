@@ -28,7 +28,11 @@
                     <label class="form-check-label" for="exampleCheck1">Remember me</label>
                 </div>
 
+
                 <button class="btn btn-success btn-block" type="submit" value="login"><i class="fas fa-sign-in-alt"></i> Sign in</button>
+
+                <button class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i> Sign in</button>
+
                 <hr>
                 <button class="btn btn-primary btn-block" type="button" id="btn-signup"><i class="fas fa-user-plus"></i> Sign up New Account</button>
             </form>

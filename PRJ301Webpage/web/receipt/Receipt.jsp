@@ -17,8 +17,8 @@
     </head>    
     <body>
         <button class="btn btn-primary" name="action" value="back"><i class="bi bi-bag"></i>Home</button>
-        <h2 style = "text-align: center, color:red, text-weight:bold">Shop Name Here</h2>
-        <h3 style = "text-align: center, color:blue, text-weight:bold">---Receipt---</h3>
+        <h2 style = "text-align: center; color:red; font-weight:bold">Shop Name Here</h2>
+        <h3 style = "text-align: center; color:blue; font-weight:bold">---Receipt---</h3>
             <table class="table table-striped">
                 <tr>
                     <th>No.</th>
