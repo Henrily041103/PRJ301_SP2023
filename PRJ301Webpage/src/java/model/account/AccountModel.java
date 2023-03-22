@@ -46,5 +46,6 @@ public abstract class AccountModel {
     
     public abstract String getRole();
     public abstract String getPage();
-    public abstract boolean checkRole(String action, String controller);
+    public abstract boolean checkRole(String url);
+    public abstract String getButton();
 }

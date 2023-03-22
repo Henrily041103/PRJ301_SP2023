@@ -36,13 +36,19 @@ public class UserModel extends AccountModel {
     }
 
     @Override
-    public boolean checkRole(String action, String controller) {
+    public boolean checkRole(String url) {
+        String controller = url.substring(url.indexOf("/")+1, url.lastIndexOf("/"));
         return !controller.equals("edit");
     }
 
     @Override
     public String getPage() {
         return "shop.jsp";
+    }
+
+    @Override
+    public String getButton() {
+        return "<a href='<c:url value='/cart/add.do' />' class='btn btn-outline-dark'> Add to cart</a>";
     }
     
 }

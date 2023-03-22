@@ -5,7 +5,6 @@
  */
 package model.product;
 
-import java.io.File;
 
 /**
  *
@@ -111,5 +110,13 @@ public class ProductDTO {
     
     public String getName(){
         return this.type + this.brand + this.color + this.id;
+    }
+    
+    public String getImage() {
+        return this.id + ".jpg";
+    }
+    
+    public boolean getStatus() {
+        return this.stock > 0;
     }
 }

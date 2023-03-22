@@ -32,13 +32,18 @@ public class AdminModel extends AccountModel {
     }
 
     @Override
-    public boolean checkRole(String action, String controller) {
+    public boolean checkRole(String url) {
         return true;
     }
 
     @Override
     public String getPage() {
         return "admin.jsp";
+    }
+
+    @Override
+    public String getButton() {
+        return "<a href='<c:url value='/shop/edit.do' />' class='btn btn-outline-dark'> Edit Product</a>";
     }
     
 }

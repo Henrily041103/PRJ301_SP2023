@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import controller.UnrecognizedActionException;
+import model.account.AccountAlreadyExistsException;
 import model.account.AccountDAO;
 import model.account.AccountFactory;
 import model.account.AccountModel;
@@ -26,70 +26,58 @@ import model.account.AccountNotFoundException;
 @WebServlet(name = "LoginController", urlPatterns = {"/login"})
 public class LoginController extends HttpServlet {
 
-    private static final String ERROR = "login.jsp";
-    private static final String SHOP = "index.jsp";
-    private static final String REGISTER = "register.jsp";
-    private static final String LOGIN = "login.jsp";
+    private static final String MAIN = "/WEB-INF/layout/main.jsp";
+
+    private static final String SHOP = "shop";
+    private static final String SHOP_PAGE = "index";
+
+    private static final String REGISTER = "login";
+    private static final String REGISTER_PAGE = "register";
+
+    private static final String LOGIN = "login";
+    private static final String LOGIN_PAGE = "login";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
-        String url = "";
-
+        String controller = request.getParameter("controller");
+//        System.out.println("controller: "+controller);
+//        System.out.println("action: "+action);
         try {
             HttpSession session = request.getSession();
             switch (action) {
-                case "login":
-                    url = login(request, session);
-                    break;
-                case "logout":
-                    url = logout(session);
-                    break;
-                case "register":
-                    url = register();
+                case "login-handler":
+                    login_handler(request, session);
                     break;
                 case "register-handler":
-                    url = registerHandler(request);
+                    registerHandler(request);
                     break;
-                default:
-                    throw new UnrecognizedActionException();
             }
-        } catch (UnrecognizedActionException e) {
-            log("Error at LoginController" + e.toString());
-            url = ERROR;
+        } catch (AccountNotFoundException | SQLException | AccountAlreadyExistsException e) {
+            request.setAttribute("message", e.getMessage());
+            request.setAttribute("controller", LOGIN);
+            request.setAttribute("action", LOGIN_PAGE);
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            request.getRequestDispatcher(MAIN).forward(request, response);
         }
     }
 
-    private String login(HttpServletRequest request, HttpSession session) {
+    private void login_handler(HttpServletRequest request, HttpSession session) throws AccountNotFoundException, SQLException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
         AccountFactory factory = new AccountFactory();
         AccountDAO dao = new AccountDAO();
-        try {
-            AccountModel loginUser = factory.generateExistingAccount(username, password, dao);
-            session.setAttribute("current-user", loginUser);
-            return SHOP;
-        } catch (AccountNotFoundException | SQLException ex) {
-            log("Error at Login" + ex.toString());
-            return ERROR;
-        }
+        AccountModel loginUser = factory.generateExistingAccount(username, password, dao);
+        session.setAttribute("current-user", loginUser);
 
+        request.setAttribute("controller", SHOP);
+        request.setAttribute("action", SHOP_PAGE);
     }
 
-    private String logout(HttpSession session) {
-        session.invalidate();
-        return LOGIN;
-    }
-    
-    private String register() {
-        return REGISTER;
-    }
-
-    private String registerHandler(HttpServletRequest request) {
+    private void registerHandler(HttpServletRequest request) 
+            throws AccountNotFoundException, AccountAlreadyExistsException, SQLException {
         String username = request.getParameter("username");
         String userId = request.getParameter("userId");
         String password = request.getParameter("password");
@@ -97,16 +85,14 @@ public class LoginController extends HttpServlet {
         AccountFactory factory = new AccountFactory();
         AccountDAO dao = new AccountDAO();
         AccountModel model = factory.generateNewAccount(username, userId);
-        try {
-            if (model != null) {
-                factory.generateEntity(model, password, dao);
-                return LOGIN;
-            }
-            else throw new Exception("Username, ID or password cannot be null.");
-        } catch (Exception ex) {
-            log("Error at REGISTER" + ex.toString());
-            return ERROR;
+        if (model != null) {
+            factory.generateEntity(model, password, dao);
+            request.setAttribute("controller", SHOP);
+            request.setAttribute("action", SHOP_PAGE);
+        } else {
+            throw new AccountNotFoundException();
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -18,7 +18,6 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.account.AccountModel;
 import utils.StringUtil;
@@ -31,7 +30,7 @@ public class AuthenFilter implements Filter {
 
     private static List<String> NON_AUTHEN_FUNCTIONS;
     private static final boolean DEBUG = true;
-    private static final String LOGIN_PAGE = "login.jsp";
+//    private static final String LOGIN_PAGE = "/login/login.jsp";
     // The filter configuration object we are associated with.  If
     // this value is null, this filter instance is not currently
     // configured. 
@@ -39,12 +38,13 @@ public class AuthenFilter implements Filter {
 
     public AuthenFilter() {
         NON_AUTHEN_FUNCTIONS = new ArrayList<>();
-        NON_AUTHEN_FUNCTIONS.add("user/login");
-        NON_AUTHEN_FUNCTIONS.add("user/register");
-        NON_AUTHEN_FUNCTIONS.add("shop/list");
-//        NON_AUTHEN_FUNCTIONS.add(".jsg");
-//        NON_AUTHEN_FUNCTIONS.add(".png");
-//        NON_AUTHEN_FUNCTIONS.add(".gif");
+        NON_AUTHEN_FUNCTIONS.add("/login/login.do");
+        NON_AUTHEN_FUNCTIONS.add("/login/register.do");
+        NON_AUTHEN_FUNCTIONS.add("/shop/index.do");
+        NON_AUTHEN_FUNCTIONS.add("/cart/add.do");
+        NON_AUTHEN_FUNCTIONS.add("/cart/show.do");
+        NON_AUTHEN_FUNCTIONS.add("/cart/back.do");
+//        NON_AUTHEN_FUNCTIONS.add("/index.jsp");
     }
 
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
@@ -59,14 +59,6 @@ public class AuthenFilter implements Filter {
         if (DEBUG) {
             log("AuthenFilter:DoAfterProcessing");
         }
-    }
-
-    private String getController(String url) {
-        return url.substring(StringUtil.nthLastIndexOf(2, "/", url) + 1, url.lastIndexOf("/"));
-    }
-
-    private String getAction(String url) {
-        return url.substring(url.lastIndexOf("/") + 1, url.lastIndexOf("."));
     }
 
     /**
@@ -84,14 +76,16 @@ public class AuthenFilter implements Filter {
             throws IOException, ServletException {
         try {
             HttpServletRequest req = (HttpServletRequest) request;
-            HttpServletResponse res = (HttpServletResponse) response;
 
             String url = req.getServletPath();
-            String controller = getController(url);
-            String action = getAction(url);
+            if (url.equals("/index.jsp")) {
+                url = "/shop/index.do";
+            }
+            req.setAttribute("url", url);
 
-            if (NON_AUTHEN_FUNCTIONS.contains(controller + "/" + action)) {
+            if (NON_AUTHEN_FUNCTIONS.contains(url)) {
                 chain.doFilter(request, response);
+//                System.out.println("filtered");
                 return;
             }
 
@@ -102,22 +96,16 @@ public class AuthenFilter implements Filter {
 
             HttpSession session = req.getSession();
             AccountModel user = (AccountModel) session.getAttribute("current-user");
-            
-            if (user == null) {
-                res.sendRedirect(LOGIN_PAGE);
-            } else {
-                //phanquyen
-                //user dang nhap voi quyen ad va truy cap tai nguyen duoc cho phep cua role ROLE_AD
-                if (!user.checkRole(action, controller)) {
-                    controller = "user";
-                    action = "login";
-                }
+
+            //phanquyen
+            //user dang nhap voi quyen ad va truy cap tai nguyen duoc cho phep cua role ROLE_AD
+            if (user == null || !user.checkRole(url)) {
+                req.setAttribute("rejected", true);
             }
-            request.setAttribute("controller", controller);
-            request.setAttribute("action", action);
+
             chain.doFilter(request, response);
         } catch (IOException | ServletException e) {
-            log("Exception occured. Please try again.");
+            log(e.getMessage());
         }
 
     }

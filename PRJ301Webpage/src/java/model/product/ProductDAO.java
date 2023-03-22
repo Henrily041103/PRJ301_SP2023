@@ -5,12 +5,12 @@
  */
 package model.product;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,56 +23,58 @@ import utils.DBUtils;
 public class ProductDAO {
 
     public List<ProductDTO> select() throws SQLException {
-        List<ProductDTO> list = null;
-        Connection con = DBUtils.getConnection();
-        Statement stm = con.createStatement();
-        ResultSet rs = stm.executeQuery("select * from product");
-        list = new ArrayList<>();
-        while (rs.next()) {
-            ProductDTO product = new ProductDTO();
-            product.setId(rs.getString("ProId"));
-            product.setBrand(rs.getString("ProBrand"));
-            product.setType(rs.getString("ProType"));
-            product.setPrice(rs.getDouble("price"));
-            product.setSale(rs.getInt("sale"));
-            product.setStock(rs.getInt("stock"));
-            product.setAgeGroup(rs.getString("ageGroup"));
-            product.setSize(rs.getString("size"));
-            product.setColor(rs.getString("color"));
-            list.add(product);
+        List<ProductDTO> list;
+        try (
+                Connection con = DBUtils.getConnection();
+                Statement stm = con.createStatement();
+                ResultSet rs = stm.executeQuery("select * from product");) {
+            list = new ArrayList<>();
+            while (rs.next()) {
+                ProductDTO product = new ProductDTO();
+                product.setId(rs.getString("ProId"));
+                product.setBrand(rs.getString("ProBrand"));
+                product.setType(rs.getString("ProType"));
+                product.setPrice(rs.getDouble("price"));
+                product.setSale(rs.getInt("sale"));
+                product.setStock(rs.getInt("stock"));
+                product.setAgeGroup(rs.getString("ageGroup"));
+                product.setSize(rs.getString("size"));
+                product.setColor(rs.getString("color"));
+                list.add(product);
+            }
         }
-        con.close();
         return list;
     }
 
     public int GetNoOfRecords() throws SQLException {
-        List<ProductDTO> list = null;
-        Connection con = DBUtils.getConnection();
-        Statement stm = con.createStatement();
-        ResultSet rs = stm.executeQuery("select * from product");
-        list = new ArrayList<>();
-        while (rs.next()) {
-            ProductDTO product = new ProductDTO();
-            product.setId(rs.getString("ProId"));
-            product.setBrand(rs.getString("ProBrand"));
-            product.setType(rs.getString("ProType"));
-            product.setPrice(rs.getDouble("price"));
-            product.setSale(rs.getInt("sale"));
-            product.setStock(rs.getInt("stock"));
-            product.setAgeGroup(rs.getString("ageGroup"));
-            product.setSize(rs.getString("size"));
-            product.setColor(rs.getString("color"));
-            list.add(product);
+        List<ProductDTO> list;
+        try (
+                Connection con = DBUtils.getConnection();
+                Statement stm = con.createStatement();
+                ResultSet rs = stm.executeQuery("select * from product");) {
+            list = new ArrayList<>();
+            while (rs.next()) {
+                ProductDTO product = new ProductDTO();
+                product.setId(rs.getString("ProId"));
+                product.setBrand(rs.getString("ProBrand"));
+                product.setType(rs.getString("ProType"));
+                product.setPrice(rs.getDouble("price"));
+                product.setSale(rs.getInt("sale"));
+                product.setStock(rs.getInt("stock"));
+                product.setAgeGroup(rs.getString("ageGroup"));
+                product.setSize(rs.getString("size"));
+                product.setColor(rs.getString("color"));
+                list.add(product);
+            }
         }
-        con.close();
         return list.size();
     }
 
     public static List<ProductDTO> getRecords(int start, int total) {
-        List<ProductDTO> list = new ArrayList<ProductDTO>();
-        try {
-            Connection con = DBUtils.getConnection();
-            PreparedStatement ps = con.prepareStatement("select * from product");
+        List<ProductDTO> list = new ArrayList<>();
+        try (
+                Connection con = DBUtils.getConnection();
+                PreparedStatement ps = con.prepareStatement("select * from product");) {
             ps.setInt(2, start - 1);
             ps.setInt(1, total);
             ResultSet rs = ps.executeQuery();
@@ -89,7 +91,7 @@ public class ProductDAO {
                 product.setColor(rs.getString("color"));
                 list.add(product);
             }
-            con.close();
+            rs.close();
             System.out.println(list.size());
         } catch (Exception e) {
             System.out.println(e);
@@ -97,47 +99,48 @@ public class ProductDAO {
         return list;
     }
 
-    public void create(ProductDTO product) throws SQLException {
-        //Tạo connection để kết nối vào DBMS
-        Connection con = DBUtils.getConnection();
-        //Tạo đối tượng PreparedStatement
-        PreparedStatement stm = con.prepareStatement("insert product values(?, ?, ?, ?, ?, ?, ? ,? ,?)");
-
-        stm.setString(1, product.getId());
-        stm.setString(2, product.getBrand());
-        stm.setString(3, product.getType());
-        stm.setDouble(4, product.getPrice());
-        stm.setInt(5, product.getSale());
-        stm.setInt(6, product.getStock());
-        stm.setString(7, product.getAgeGroup());
-        stm.setString(8, product.getSize());
-        stm.setString(9, product.getColor());
-        int count = stm.executeUpdate();
-        con.close();
+    public int create(ProductDTO product) throws SQLException {
+        try (
+                Connection con = DBUtils.getConnection();
+                PreparedStatement stm = con.prepareStatement("insert product values(?, ?, ?, ?, ?, ?, ? ,? ,?)");) {    
+            stm.setString(1, product.getId());
+            stm.setString(2, product.getBrand());
+            stm.setString(3, product.getType());
+            stm.setDouble(4, product.getPrice());
+            stm.setInt(5, product.getSale());
+            stm.setInt(6, product.getStock());
+            stm.setString(7, product.getAgeGroup());
+            stm.setString(8, product.getSize());
+            stm.setString(9, product.getColor());
+            return stm.executeUpdate();
+        }
     }
 
     public ProductDTO read(String id) throws SQLException {
         ProductDTO product = null;
-        //Tạo connection để kết nối vào DBMS
-        Connection con = DBUtils.getConnection();
         //Tạo đối tượng PreparedStatement
-        PreparedStatement stm = con.prepareStatement("select * from product where id = ?");
-        stm.setString(1, id);
-        //Thực thi lệnh sql
-        ResultSet rs = stm.executeQuery();
-        //Load dữ liệu vào đối tượng toy nếu có
-        if (rs.next()) {
-            product.setId(rs.getString("ProId"));
-            product.setBrand(rs.getString("ProBrand"));
-            product.setType(rs.getString("ProType"));
-            product.setPrice(rs.getDouble("price"));
-            product.setSale(rs.getInt("sale"));
-            product.setStock(rs.getInt("stock"));
-            product.setAgeGroup(rs.getString("ageGroup"));
-            product.setSize(rs.getString("size"));
-            product.setColor(rs.getString("color"));
+        try ( //Tạo connection để kết nối vào DBMS
+                Connection con = DBUtils.getConnection();
+                PreparedStatement stm = con.prepareStatement("select * from product where id = ?");) {
+            //Tạo đối tượng PreparedStatement
+            
+            stm.setString(1, id);
+            //Thực thi lệnh sql
+            ResultSet rs = stm.executeQuery();
+            //Load dữ liệu vào đối tượng toy nếu có
+            if (rs.next()) {
+                product.setId(rs.getString("ProId"));
+                product.setBrand(rs.getString("ProBrand"));
+                product.setType(rs.getString("ProType"));
+                product.setPrice(rs.getDouble("price"));
+                product.setSale(rs.getInt("sale"));
+                product.setStock(rs.getInt("stock"));
+                product.setAgeGroup(rs.getString("ageGroup"));
+                product.setSize(rs.getString("size"));
+                product.setColor(rs.getString("color"));
+            }
+            rs.close();
         }
-        con.close();
         return product;
     }
 
@@ -165,7 +168,7 @@ public class ProductDAO {
         //Tạo connection để kết nối vào DBMS
         Connection con = DBUtils.getConnection();
         //Tạo đối tượng PreparedStatement
-        PreparedStatement stm = con.prepareStatement("delete from product where ProId = ?");
+        PreparedStatement stm = con.prepareStatement("update product set stock = 0 where ProId = ?");
         stm.setString(1, id);
         //Thực thi lệnh sql
         int count = stm.executeUpdate();
@@ -174,7 +177,7 @@ public class ProductDAO {
 
     public void lowerStock(HashMap<ProductDTO, Integer> cart) throws SQLException {
         Connection con = DBUtils.getConnection();
-        for (ProductDTO i : cart.keySet()) {            
+        for (ProductDTO i : cart.keySet()) {
             PreparedStatement stm = con.prepareStatement("update product set stock = ? where ProID = ?");
             stm.setInt(1, (i.getStock() - cart.get(i)));
             stm.setString(2, i.getId().toString());

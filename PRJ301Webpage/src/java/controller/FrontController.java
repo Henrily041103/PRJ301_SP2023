@@ -10,8 +10,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import model.account.AccountModel;
 
 /**
  *
@@ -22,21 +20,32 @@ public class FrontController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session =request.getSession();
-        AccountModel user = (AccountModel)session.getAttribute("current-user");
+        String url = (String)request.getAttribute("url");
+        String controller, action;
+        Object rejected = request.getAttribute("rejected");
         
-        if (!authenticateUser(user)) {
-            request.setAttribute("controller", "user");
-            request.setAttribute("action", "login");
-            request.setAttribute("error", "Incorrect user info");
+        if (rejected != null && (Boolean)rejected==true) {
+            controller = "/login";
+            action = "login";
         }
-        
-        String controller = (String)request.getAttribute("controller");
+        else {
+            controller = getController(url);
+            action = getAction(url);
+        }
+//        System.out.println("url: "+url);
+        System.out.println("controller: "+controller);
+        System.out.println("action: "+action);
+//        System.out.println("rejected: "+rejected);
+        request.setAttribute("action", action);
+        request.setAttribute("controller", controller);
         request.getRequestDispatcher(controller).forward(request, response);
     }
-    
-    private boolean authenticateUser(AccountModel user) {
-        return true;
+    private String getController(String url) {
+        return url.substring(url.indexOf("/"), url.lastIndexOf("/"));
+    }
+
+    private String getAction(String url) {
+        return url.substring(url.lastIndexOf("/") + 1, url.lastIndexOf("."));
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
