@@ -53,6 +53,11 @@ public class LoginController extends HttpServlet {
                 case "register-handler":
                     registerHandler(request);
                     break;
+                case "logout":
+                    session.invalidate();
+                    request.setAttribute("controller", LOGIN);
+                    request.setAttribute("action", LOGIN_PAGE);
+                    break;
             }
         } catch (AccountNotFoundException | SQLException | AccountAlreadyExistsException e) {
             request.setAttribute("message", e.getMessage());
@@ -76,7 +81,7 @@ public class LoginController extends HttpServlet {
         request.setAttribute("action", SHOP_PAGE);
     }
 
-    private void registerHandler(HttpServletRequest request) 
+    private void registerHandler(HttpServletRequest request)
             throws AccountNotFoundException, AccountAlreadyExistsException, SQLException {
         String username = request.getParameter("username");
         String userId = request.getParameter("userId");

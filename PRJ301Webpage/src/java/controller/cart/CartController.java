@@ -26,7 +26,7 @@ import model.product.ProductDAO;
 @WebServlet(name = "CartController", urlPatterns = {"/cart"})
 public class CartController extends HttpServlet {
 
-    private static final String MAIN = "/WEB-INF/layouts/main.jsp";
+    private static final String MAIN = "/WEB-INF/layout/main.jsp";
 
     private static final String SHOP = "shop";
     private static final String SHOP_PAGE = "index";

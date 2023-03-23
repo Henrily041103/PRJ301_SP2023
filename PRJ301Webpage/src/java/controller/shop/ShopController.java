@@ -26,7 +26,7 @@ import model.product.ProductDTO;
 @WebServlet(name = "ShopController", urlPatterns = {"/shop"})
 public class ShopController extends HttpServlet {
 
-    private static final String MAIN = "/WEB-INF/layouts/main.jsp";
+    private static final String MAIN = "/WEB-INF/layout/main.jsp";
 
     private static final String SHOP = "shop";
     private static final String SHOP_PAGE = "index";
@@ -94,6 +94,7 @@ public class ShopController extends HttpServlet {
             request.setAttribute("list", list);
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", page);
+            System.out.println(list.size());
 
         } catch (SQLException ex) {
             //Hien trang thong bao loi

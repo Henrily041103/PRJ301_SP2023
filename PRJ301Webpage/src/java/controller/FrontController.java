@@ -33,8 +33,8 @@ public class FrontController extends HttpServlet {
             action = getAction(url);
         }
 //        System.out.println("url: "+url);
-        System.out.println("controller: "+controller);
-        System.out.println("action: "+action);
+//        System.out.println("controller: "+controller);
+//        System.out.println("action: "+action);
 //        System.out.println("rejected: "+rejected);
         request.setAttribute("action", action);
         request.setAttribute("controller", controller);

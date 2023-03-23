@@ -17,15 +17,16 @@ import java.sql.SQLException;
 public class DBUtils {
     
     public static Connection getConnection() throws SQLException{
-        String url = "jdbc:sqlserver://localhost;databaseName=BabyShop;user=sa;password=12345";
+        String url = "jdbc:sqlserver://localhost;databaseName=BabyStore;user=sa;password=12345";
         Connection con = null;
         try{
             //Loading a driver
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Class.forName("com.microsoft.jdbc.sqlserver.SQLServerDriver");
             //Creating a connection
             con =DriverManager.getConnection(url);
         } catch (ClassNotFoundException | SQLException ex) {
             //Gay ra SQLException
+            System.out.println("error:" + ex.toString());
             throw new SQLException(ex.getMessage());
         }
         return con;
